@@ -122,7 +122,7 @@ void f(double da, float fla)
 # c++中数组名与指针的区别与联系
 数组名与指针是不同的，其中一个体现就是对数组名和指针使用sizeof()运算符得到的结果不同，数组名不能进行自加和自减操作，而指针可以。
 可以将数组名理解成一种指针常量（并不代表是），数组名可以转化为指针
-```
+``` //cpp
 #include <iostream>
 using namespace std;
 void Fun(int a[])
@@ -145,11 +145,5 @@ int main()
 ---  
 ## 数据类型排名
 能够容纳更大数值的类型排名较高，具体如下（从左至右为从高到低）：
-| long double |
-| double |
-| float |
-| unsigned long long int |
-| long long int |
-| unsigned long int |
-| long int |
+| long double | double | float | unsigned long long int | long long int | unsigned long int | long int |
  
