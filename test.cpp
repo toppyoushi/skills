@@ -1,40 +1,34 @@
 #include <iostream>
-#include <cstring>
-#include <iomanip>
+#include <vector>
 using namespace std;
-class A{
-public:
-    A(int a):_a(a)
-    {
-        cout<<"A construtor"<<endl;
+vector<vector<int> > array;
+bool Find(int target, vector<vector<int> > array) {
+        bool found = false;
+        int row = 0;
+        int column = array[0].size()-1;
+        cout<<row<<""<<column<<endl;
+        int i = column;
+        int j = row;
+        while(i>0 && j <=column)
+        {
+            cout<<array[i][j]<<endl;
+            if(array[i][j] == target)
+            {
+                found = true;
+                break;
+            }
+            else if(array[i][j] > target)
+            {
+                i--;
+            }
+            else
+                j++;
+        }
+        return found;
     }
-    int getA()
-    {
-        return this->_a;
-    }
-    ~A()
-    {
-        cout<<"A deconstructor"<<endl;
-    }
-protected:
-    int _a;
-};
-class B:public A{
-public:
-    B(int a,int b):A(a),_b(b){
-        cout<<"B constructor"<<endl;
-        cout<<_a<<_b<<endl;
-    }
-private:
-    int _b;
-};
-void fun(A a)
-{
-    cout<<a.getA()<<endl;
-}
 int main()
 {
-    // A *a;
-    // a = new A(5);
-    fun(5);
+    array.push_back({1,2,3,4,5});
+    array.push_back({3,4,6,6,2});
+    Find(3,array);
 }

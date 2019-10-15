@@ -175,17 +175,111 @@ long double > double >float > unsigned long long int > long long int > long int 
 C++类型转换表达式：
 
 ``` \\cpp
-    static_cast<datatype>(value)
+    static_cast<datatype>(value) /相关类型转换
+    reinterpret_cast<datatype>(value) //无关类型转换
     const_cast<datatype>(value) //删除const属性的转换
     dynamic_cast<datatype>(value) //用于将一类父类对象的指针转换为子类对象的指针或引用
 ```
 
 C++ 重载、覆盖与重定义区别  
 
-| :----: | :----: | :----: |
 | 重载 | 同一作用域内 | 函数名相同、形参的类型、个数不同 |
+| :----: | :----: | :----: |
 | 覆盖 | 分别位于基类与派生类 | 函数名相同、形参类型、个数相同，返回值相同 |
 | 重定义 | 分别位于基类与派生类 | 函数名相同就构成重定义 |
 
 ## dynamic_cast 动态类型转换
+
+dynamic_cast 用于将父类对象的指针转换为子类对象的指针或引用（动态转换）  
+将子类对象指针转换为父类指针可直接用切片完成，但父类对象转换为子类对象则不安全，  
+dynamic_cast会先检查能否转换成功，能转换则转换，不能转换则返回0，*dynamic_cast只能用于含有虚函数的类*
+
+```dynamic_cast<type*>(e)```能够转换成功的三种情况：  
+
+1. e的类型是type类型的共有派生类：派生类转基类一定能成功
+2. e的类型是type类型的基类，但是指向的是派生类的对象，或者基类引用引用派生类对象，如果e指向的是基类对象，则转换不能成功
+3. e的类型就是个type类型，一定能够转换成功
+
+``` \\cpp
+#include<iostream>
+using namespace std;
+
+class Person{
+protected:
+    string _name;
+	virtual void Print()
+	{
+		cout << "I am the father" << endl;
+	}
+};
+
+class Student :public Person
+{
+public:
+	int _num;
+	virtual void Print()
+	{
+		cout << "I am the son" << endl;
+	}
+};
+void Func(Person* p)
+{
+	//父类对象指针->子类指针/引用
+	Student* sp = dynamic_cast<Student*>(p);//只允许子类对象指针转换
+	sp->Print();
+}
+int main()
+{
+	Person p;
+	Student s;
+	//Func(&p);//使用dynamic_cast，不能将父类指针转换成子类指针，防止了越界行为
+	Func(&s);
+	return 0;
+}
+```
+
+# C++各种类型与0的比较
+
+1. bool值
+
+```\\cpp
+    bool flag = true
+    if(flag)
+    if(!flag)
+```
+
+2. int,long,short等整型
+
+```\\cpp
+    int i = 1;
+    if(i == 0)
+    if(i != 0)
+```
+
+3. float,double等浮点型
+
+```\\cpp
+    #define EPSILON 0.000000000001
+    float flag = 1.0;
+    if ( flag < EPSILON && flag > -EPSILON)
+```
+
+4. 判断两浮点数是否相等
+```
+    #define EPSILON 0.000000000001
+    float a = 2.1, b = 1.0;
+    if((a-b)<EPSILON && (a-b)>-EPSILON)
+```
+
+5. 指针
+```
+    int *ptr = new int(5);
+    if(ptr == NULL)
+    if(ptr != NULL)
+```
+
+# C++深拷贝与浅拷贝
+
+
+# C++重载
 
