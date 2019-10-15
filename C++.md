@@ -118,3 +118,38 @@ void f(double da, float fla)
 - 提升匹配：整数提升，bool到int，char到int，short到int，float到double
 - 使用标准转换匹配： 如int到double，double到int，Derived\*到Base\*，T \*到void \*,int到unsigned int
 - 省略号匹配
+
+# c++中数组名与指针的区别与联系
+数组名与指针是不同的，其中一个体现就是对数组名和指针使用sizeof()运算符得到的结果不同，数组名不能进行自加和自减操作，而指针可以。
+可以将数组名理解成一种指针常量（并不代表是），数组名可以转化为指针
+```
+#include <iostream>
+using namespace std;
+void Fun(int a[])
+{
+    cout<<sizeof(a)<<endl;          //自动将将数组名转化为指针类型
+}
+int main()
+{
+    int a[5] = {1, 2, 3, 4, 5};
+    int *ptr = (int *)(&a+1);       //可以讲数组名a看做int[]类型，对其取地址，就是取一个int[]型结构的地址（指针），
+    ptr--;                          //对地址自加得到下一个int[]的地址，再转换成int型指针，自减后得到数组最后一个元素
+    cout<<*(ptr)<<endl;
+    Fun(a);
+    return 0;
+}
+```
+
+# C++强制类型转换
+强制类型转换发生在赋值、数学表达式等情况下，当运算符的操作数类型不同时，C++会将操作数转换为同一数据类型
+---  
+## 数据类型排名
+能够容纳更大数值的类型排名较高，具体如下（从左至右为从高到低）：
+| long double |
+| double |
+| float |
+| unsigned long long int |
+| long long int |
+| unsigned long int |
+| long int |
+ 
