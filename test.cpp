@@ -1,34 +1,24 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-vector<vector<int> > array;
-bool Find(int target, vector<vector<int> > array) {
-        bool found = false;
-        int row = 0;
-        int column = array[0].size()-1;
-        cout<<row<<""<<column<<endl;
-        int i = column;
-        int j = row;
-        while(i>0 && j <=column)
+int jumpFloor(int number) {
+        if(number < 1)
+            return 0;
+        if(number == 1)
         {
-            cout<<array[i][j]<<endl;
-            if(array[i][j] == target)
-            {
-                found = true;
-                break;
-            }
-            else if(array[i][j] > target)
-            {
-                i--;
-            }
-            else
-                j++;
+            return 1;
         }
-        return found;
+        if(number == 2)
+        {
+            return 2;
+        }
+        return jumpFloor(number - 1) + jumpFloor(number - 2);
     }
-int main()
+int main(int argc,char *argv[])
 {
-    array.push_back({1,2,3,4,5});
-    array.push_back({3,4,6,6,2});
-    Find(3,array);
+    int n;
+    cin>>n;
+    cout<<jumpFloor(n)<<endl;;
+
+    return 0;
 }
