@@ -223,16 +223,10 @@ void merge(vector<int> &a, int l, int mid, int r)
             i++;
         }
     }
-    for (int t = 0; t < b.size(); ++t)
-    {
-        cout << b[t] << " ";
-    }
-    cout << endl;
     vector<int>::iterator it = a.begin() + l;
     for (int i = 0; i < b.size(); ++i)
     {
-        (*it) = b[i];
-        it++;
+        a[l+i] = b[i];
     }
     b.clear();
 }
