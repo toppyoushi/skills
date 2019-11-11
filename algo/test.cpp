@@ -4,13 +4,14 @@
 #include <cstdio>
 #include <vector>
 using namespace std;
-class A{
-    private:
+class A
+{
+public:
     static int a;
 };
-int A::a=0;
+int A::a = 0;
 int main()
 {
     A a1;
-    cout<<A::a<<endl;
+    cout << A::a << endl;
 }
