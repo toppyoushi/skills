@@ -78,11 +78,6 @@ void binsort(vector<int> &a)
             a[j + 1] = a[j];
         }
         a[l] = temp;
-        for (int i = 0; i < a.size(); ++i)
-        {
-            cout << a[i] << " ";
-        }
-        cout << endl;
     }
 }
 void shellinsert(vector<int> &a, int delta)
@@ -223,10 +218,9 @@ void merge(vector<int> &a, int l, int mid, int r)
             i++;
         }
     }
-    vector<int>::iterator it = a.begin() + l;
     for (int i = 0; i < b.size(); ++i)
     {
-        a[l+i] = b[i];
+        a[l + i] = b[i];
     }
     b.clear();
 }
