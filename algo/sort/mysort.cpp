@@ -104,11 +104,6 @@ void shellsort(vector<int> &a)
     {
         shellinsert(a, delta);
         delta /= 2;
-        for (int i = 0; i < a.size(); ++i)
-        {
-            cout << a[i] << " ";
-        }
-        cout << endl;
     }
     shellinsert(a, 1);
 }
@@ -222,7 +217,6 @@ void merge(vector<int> &a, int l, int mid, int r)
     {
         a[l + i] = b[i];
     }
-    b.clear();
 }
 //o(nlogn) o(nlogn) o(nlogn) o(n)
 void mergesort(vector<int> &a, int l, int r)
